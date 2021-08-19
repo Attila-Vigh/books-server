@@ -62,12 +62,22 @@ export const updateStudent = async (req, res, next) => {
     }
 };
 
+export const deleteStudent = async (req, res, next) => {
+    try {
+        await students.delete( req.params.id, pathToFile);
+        res.status(204).send();
+    }
+    catch (error) {
+        next(createError(500, error.message));
+    }
+};
+
 const studentsHandler = {
     add: addStudent,
     list: listStudents,
     single: singleStudent,
     update: updateStudent,
-    // delete: deleteStudent
+    delete: deleteStudent
 };
 
 export default studentsHandler;

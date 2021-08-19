@@ -14,5 +14,5 @@ app.use('/', services);
 
 console.table(listEndpoints(app));
 
-app.listen(PORT, () => console.log(`Server is running on port ${ PORT }`));
-app.on('error', (err) => console.error(err));
+app.listen(PORT, (  ) => console.log(`✅ Server is running on port ${ PORT }`));
+app.on('error' , (err) => console.error(`❌ Server is not running because of : ${ error }`);
