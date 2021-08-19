@@ -25,6 +25,7 @@
     "express": "^4.17.1",
     "express-list-endpoints": "^6.0.0",
     "fs-extra": "^10.0.0",
+    "http-errors": "^1.7.2",
     "uniqid": "^5.4.0"
   },
   "devDependencies": {
