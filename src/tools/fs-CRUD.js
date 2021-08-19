@@ -12,7 +12,7 @@ export const readData = async (filePath) => {
     }
     catch (error)
     {
-        throw Error("readData contact is failed");
+        throw Error("readData is failed");
     }
 };
 
@@ -46,13 +46,40 @@ export const writeData = async (data, filePath) => {
         await fs.writeJSON(filePath, dataList);
         return newData;
     }
-    catch (error) {
+    catch (error)
+    {
         throw Error("writeData has failed with error: " + error);
     }
 };
 
 export const updateData = async (id, dataToUpdate, filePath) => {
-
+    try
+    {
+        const dataList = await readData(filePath);
+        const itemIndex = dataList.findIndex( item => item.id === id);
+        console.log("dataToUpdate ", dataToUpdate );
+        if (!itemIndex > -1){
+            const item = dataList[ itemIndex ];
+            console.log("item ", item );
+            const dataUpdated = {
+                ...item,
+                ...dataToUpdate,
+                id,
+                updatedAt: new Date().toISOString()
+            };
+            dataList[ itemIndex ] = dataUpdated;
+            
+            await fs.writeJSON(filePath, dataList);
+            return dataUpdated;
+        }
+        else
+            throw new Error(`updateData with id ${ id } is not found`);
+    }
+    catch (error)
+    {
+        console.log(error);
+        throw new Error(`Update data has failed with error: ${ error }`);
+    }
 };
 
 export const deleteData = async (id, filePath) => {

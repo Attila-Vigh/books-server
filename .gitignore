@@ -1,5 +1,6 @@
 public
 .env
+src/data/*.json
 # Logs
 logs
 *.log

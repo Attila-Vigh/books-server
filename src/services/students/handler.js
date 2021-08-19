@@ -44,10 +44,20 @@ export const addStudent = async (req, res, next) => {
     try
     {
         const newStudent = await students.new(req.body, pathToFile);
-        res.status(204).send(newStudent);
+        res.status(201).send(newStudent);
     }
     catch (error)
     {
+        next(createError(500, error.message));
+    }
+};
+
+export const updateStudent = async (req, res, next) => {
+    try {
+        const updatedStudent = await students.update(req.params.id, req.body, pathToFile);
+        res.status(204).send(updatedStudent);
+    }
+    catch (error) {
         next(createError(500, error.message));
     }
 };
@@ -56,7 +66,7 @@ const studentsHandler = {
     add: addStudent,
     list: listStudents,
     single: singleStudent,
-    // update: updateStudent,
+    update: updateStudent,
     // delete: deleteStudent
 };
 
